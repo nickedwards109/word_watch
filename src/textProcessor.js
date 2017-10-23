@@ -31,20 +31,21 @@ class textProcessor {
 
   static appendWordsByCount(wordCounts, sortedKeys) {
     let fontSize = 1;
-    sortedKeys.forEach((key) => {
-      if (wordCounts[key] === 1) {
-        const formattedWord = `
-          <p style="font-size: ${fontSize}em">${key}</p>
-        `;
-        $('.word-count').append(formattedWord)
+    sortedKeys.forEach((word) => {
+      if (wordCounts[word] === 1) {
+        textProcessor.sizeAndAppend(word, fontSize)
       } else {
         fontSize += 0.5;
-        const formattedWord = `
-          <p style="font-size: ${fontSize}em">${key}</p>
-        `;
-        $('.word-count').append(formattedWord)
+        textProcessor.sizeAndAppend(word, fontSize)
       }
     })
+  }
+
+  static sizeAndAppend(word, fontSize) {
+    const formattedWord = `
+      <p style="font-size: ${fontSize}em">${word}</p>
+    `;
+    $('.word-count').append(formattedWord)
   }
 }
 
