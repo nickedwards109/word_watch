@@ -5,24 +5,22 @@ class textProcessor {
   static handleWordCount() {
     $(document).keypress((event) => {
       if (event.which == 13) {
-        const paragraph = $('.text-submission').find('textarea').val();
-        const words = paragraph.split(' ');
-        httpService.postAll(words);
-
-        const wordCounts = textProcessor.count(words);
-        const sortedKeys = textProcessor.sortByCount(wordCounts);
-        textProcessor.appendWordsByCount(wordCounts, sortedKeys); 
+        textProcessor.getAndAppendWords();
       }
-    })
+    });
     $('.text-submission').find('button').on('click', (event) => {
-      const paragraph = $('.text-submission').find('textarea').val();
-      const words = paragraph.split(' ');
-      httpService.postAll(words);
+      textProcessor.getAndAppendWords();
+    });
+  }
 
-      const wordCounts = textProcessor.count(words);
-      const sortedKeys = textProcessor.sortByCount(wordCounts);
-      textProcessor.appendWordsByCount(wordCounts, sortedKeys);
-    })
+  static getAndAppendWords() {
+    const paragraph = $('.text-submission').find('textarea').val();
+    const words = paragraph.split(' ');
+    httpService.postAll(words);
+
+    const wordCounts = textProcessor.count(words);
+    const sortedKeys = textProcessor.sortByCount(wordCounts);
+    textProcessor.appendWordsByCount(wordCounts, sortedKeys);
   }
 
   static count(words) {
