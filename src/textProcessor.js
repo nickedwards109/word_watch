@@ -6,8 +6,9 @@ class textProcessor {
       const paragraph = $('.text-submission').find('textarea').val();
       const words = paragraph.split(' ');
       const wordCounts = textProcessor.count(words);
-      console.log(wordCounts)
-      // wordCounts is an object with keys representing words and values representing that word's count. 
+      const sortedKeys = textProcessor.sortByCount(wordCounts);
+      console.log(sortedKeys)
+      // textProcessor.appendWordsByCount(wordCounts);
     })
   }
 
@@ -22,6 +23,20 @@ class textProcessor {
     })
     return wordCounts;
   }
+
+  static sortByCount(wordCounts) {
+    const keys = Object.keys(wordCounts);
+    const sortedKeys = keys.sort((a, b) => { return wordCounts[a] - wordCounts[b] });
+    return sortedKeys;
+  }
+
+  // static appendWordsByCount(wordCounts) {
+  //   Object.entries(wordCounts).forEach((wordCount) => {
+  //     const word = wordCount[0];
+  //     const count = wordCount[1];
+  //     debugger
+  //   })
+  // }
 }
 
 module.exports = textProcessor;
