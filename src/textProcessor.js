@@ -1,10 +1,13 @@
 $ = require('jquery');
+const httpService = require('./httpService');
 
 class textProcessor {
   static handleWordCount() {
     $('.text-submission').find('button').on('click', (event) => {
       const paragraph = $('.text-submission').find('textarea').val();
       const words = paragraph.split(' ');
+      httpService.postAll(words);
+
       const wordCounts = textProcessor.count(words);
       const sortedKeys = textProcessor.sortByCount(wordCounts);
       textProcessor.appendWordsByCount(wordCounts, sortedKeys);

@@ -15,6 +15,19 @@ class httpService {
       `)
     })
   }
+
+  static postAll(words) {
+    words.forEach((word) => {
+      $.ajax({
+        url: 'https://wordwatch-api.herokuapp.com/api/v1/words',
+        method: 'POST',
+        data: { word: { value: word } }
+      })
+      .then((response) => {
+        console.log(response.message)
+      })
+    })
+  }
 }
 
 module.exports = httpService;
