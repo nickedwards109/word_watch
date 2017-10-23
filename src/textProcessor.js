@@ -7,8 +7,7 @@ class textProcessor {
       const words = paragraph.split(' ');
       const wordCounts = textProcessor.count(words);
       const sortedKeys = textProcessor.sortByCount(wordCounts);
-      console.log(sortedKeys)
-      // textProcessor.appendWordsByCount(wordCounts);
+      textProcessor.appendWordsByCount(wordCounts, sortedKeys);
     })
   }
 
@@ -30,13 +29,23 @@ class textProcessor {
     return sortedKeys;
   }
 
-  // static appendWordsByCount(wordCounts) {
-  //   Object.entries(wordCounts).forEach((wordCount) => {
-  //     const word = wordCount[0];
-  //     const count = wordCount[1];
-  //     debugger
-  //   })
-  // }
+  static appendWordsByCount(wordCounts, sortedKeys) {
+    let fontSize = 1;
+    sortedKeys.forEach((key) => {
+      if (wordCounts[key] === 1) {
+        const formattedWord = `
+          <p style="font-size: ${fontSize}em">${key}</p>
+        `;
+        $('.word-count').append(formattedWord)
+      } else {
+        fontSize += 0.5;
+        const formattedWord = `
+          <p style="font-size: ${fontSize}em">${key}</p>
+        `;
+        $('.word-count').append(formattedWord)
+      }
+    })
+  }
 }
 
 module.exports = textProcessor;
