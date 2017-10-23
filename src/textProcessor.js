@@ -3,8 +3,10 @@ $ = require('jquery');
 class textProcessor {
   static handleWordCount() {
     $('.text-submission').find('button').on('click', (event) => {
-      console.log('In the click handler for:')
-      console.log(event.target)
+      const paragraph = $('.text-submission').find('textarea').val();
+      const words = paragraph.split(' ');
+      console.log(words)
+      // next step is to count the words
     })
   }
 }
